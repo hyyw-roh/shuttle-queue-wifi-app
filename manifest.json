@@ -1,0 +1,13 @@
+{
+    "name": "셔틀버스 줄서기",
+    "short_name": "줄서기",
+    "start_url": "/shuttle-queue-wifi-app/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#2196f3",
+    "icons": [{
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }]
+}

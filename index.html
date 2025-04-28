@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>셔틀버스 줄서기</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+      font-size: 40px;  /* 전체 기본 글씨 크기 키움 */
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    button {
+      font-size: 30px;  /* 버튼 글씨도 키움 */
+      padding: 15px 30px;
+    }
+    h2 {
+      font-size: 45px;  /* 제목은 더 크게 */
+    }
+  </style>
+</head>
+
+<script>
+    async function getIP() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        return data.ip;
+      } catch (error) {
+        console.error("IP 주소를 가져올 수 없습니다.", error);
+        return null;
+      }
+    }
+  
+    async function checkWifi() {
+      const ip = await getIP();
+      console.log("현재 IP 주소:", ip);
+  
+      if (ip && ip.startsWith('192.168.4.')) {
+        console.log("✅ SHUTTLE_WIFI 연결 확인");
+        document.getElementById('queueButton').style.display = 'block';
+      } else {
+        alert("지정된 Wi-Fi(SHUTTLE_WIFI)에 연결되지 않았습니다.\n올바른 Wi-Fi에 연결 후 다시 시도해 주세요.");
+        document.getElementById('queueButton').style.display = 'none';
+      }
+    }
+  
+    window.onload = checkWifi;
+  </script>
+  
+
+<body>
+  <h2>   이순신고등학교    </h2>
+  <h2>셔틀버스 줄서기 시스템</h2>
+  <button onclick="joinQueue()">줄서기 참여</button>
+  <div id="result"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
