@@ -22,35 +22,6 @@
   </style>
 </head>
 
-<script>
-async function checkWifi() {
-  try {
-    const response = await fetch('https://api.ipify.org?format=json');
-    const data = await response.json();
-    const ip = data.ip;
-    console.log("현재 IP 주소:", ip);
-
-    if (ip.startsWith('192.168.4.')) {
-      console.log("✅ SHUTTLE_WIFI 연결 확인");
-      document.getElementById('queueButton').style.display = 'block';
-      document.getElementById('queueButton').disabled = false;
-    } else {
-      alert("지정된 Wi-Fi(SHUTTLE_WIFI)에 연결되지 않았습니다.\n올바른 Wi-Fi에 연결 후 다시 시도해 주세요.");
-      document.getElementById('queueButton').style.display = 'none';
-      document.getElementById('queueButton').disabled = true;
-    }
-  } catch (error) {
-    console.error("IP 주소를 가져올 수 없습니다.", error);
-    alert("인터넷 연결을 확인할 수 없습니다.\n지정된 Wi-Fi(SHUTTLE_WIFI)로 접속 후 다시 시도해 주세요.");
-    document.getElementById('queueButton').style.display = 'none';
-    document.getElementById('queueButton').disabled = true;
-  }
-}
-
-window.onload = checkWifi;
-</script>
-  
-
 <body>
   <h2>   이순신고등학교    </h2>
   <h2>셔틀버스 줄서기 시스템</h2>
